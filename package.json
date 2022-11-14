@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+<<<<<<< HEAD
     "start": "node src/index.js",
     "nodemon": "nodemon src/index.js"
   },
@@ -13,6 +14,13 @@
     "express": "^4.18.2",
     "mongoose": "^6.8.0",
     "morgan": "^1.10.0",
+=======
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+>>>>>>> edbd950 (Implemented test libraries,)
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -20,7 +28,13 @@
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
+<<<<<<< HEAD
     "nodemon": "^2.0.20",
     "vite": "^3.2.3"
+=======
+    "jsdom": "^20.0.2",
+    "vite": "^3.2.3",
+    "vitest": "^0.25.2"
+>>>>>>> edbd950 (Implemented test libraries,)
   }
 }
