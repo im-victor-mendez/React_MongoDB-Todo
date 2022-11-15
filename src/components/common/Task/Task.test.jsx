@@ -27,5 +27,19 @@ describe('Task Common Component', () => {
 
             expect(description).toHaveTextContent(descriptionContent)
         })
+
+        test('should have an edit button', () => {
+            render(<Task />)
+
+            const editButton = screen.getByTestId('task-edit')
+            expect(editButton).toHaveTextContent('Edit')
+        })
+
+        test('should have a delete button', () => {
+            render(<Task />)
+
+            const deleteButton = screen.getByTestId('task-delete')
+            expect(deleteButton).toHaveTextContent('Delete')
+        })
     })
 })
