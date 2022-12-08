@@ -20,6 +20,8 @@ app.use(express.json())
 app.use('/api/tasks', require('./routes/task.routes'))
 
 //Static files
+const path = require('path')
+app.use(express.static(path.join(__dirname, 'public')))
 
 //Starting server
 app.listen(app.get('port'), () => {
