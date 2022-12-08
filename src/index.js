@@ -16,6 +16,8 @@ app.use(morgan('dev'))
 app.use(express.json())
 
 //Routes
+// '/api/tasks' es la ruta a la cual tiene que acceder para utilizar el segundo parámetro
+app.use('/api/tasks', require('./routes/task.routes'))
 
 //Static files
 
