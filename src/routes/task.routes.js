@@ -32,11 +32,18 @@ router.put('/:id', async (req, res) => {
     res.json({status: 'Task updated', content: { oldTask, newTask }})
 })
 
+//Eliminar
 router.delete('/:id', async (req, res) => {
     const deletedTask = await Task.findById(req.params.id)
     await Task.findByIdAndRemove(req.params.id)
 
     res.json({ status: 'Task deleted', content: { deletedTask }})
+})
+
+//Buscar
+router.get('/:id', async (req, res) => {
+    const task = await Task.findById(req.params.id)
+    res.json(task)
 })
 
 module.exports = router
