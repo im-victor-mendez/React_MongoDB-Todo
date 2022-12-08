@@ -2,7 +2,7 @@
 const express = require('express')
 const app = express()
 
-const morgan = require('morgan')
+const { mongoose } = require('./database')
 
 //Settings
 
@@ -10,6 +10,7 @@ const morgan = require('morgan')
 app.set('port', process.env.PORT || 5173)
 
 //Middleware
+const morgan = require('morgan')
 app.use(morgan('dev'))
 
 //Cada que llegue un dato al servidor, llegará a esta función y si es formato JSON lo podremos utilizar en la app.
