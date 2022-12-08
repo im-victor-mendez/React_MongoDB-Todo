@@ -6,7 +6,9 @@ const router = express.Router()
 //Cuando se ingrese a esta dirección, mandará con req a la base de datos o reqresará con res
 //para mostrarlo en pantalla.
 router.get('/', (req, res) => {
-    res.send('Hello world :D')
+    res.json({
+        status: 'API works'
+    })
 })
 
 module.exports = router
