@@ -4,6 +4,9 @@ const app = express()
 
 //Settings
 
+//Servicio de la nube
+app.set('port', process.env.PORT || 5173)
+
 //Middleware
 
 //Routes
@@ -11,6 +14,6 @@ const app = express()
 //Static files
 
 //Starting server
-app.listen(5173, () => {
-    console.log('server on port 5173')
+app.listen(app.get('port'), () => {
+    console.log(`server on port ${app.get('port')}`)
 })
