@@ -12,11 +12,24 @@ router.get('/', async (req, res) => {
     res.json(tasks)
 })
 
+//Publicar/Enviar
 router.post('/', async (req, res) => {
     const { title, description } = req.body
     const task = new Task({ title, description })
     await task.save()
     res.json({status: 'task save', content: task})
+})
+
+//Actualizar
+router.put('/:id', async (req, res) => {
+    const { title, description } = req.body
+
+    const oldTask = await Task.findById(req.params.id)
+    const newTask = { title, description }
+
+    await Task.findByIdAndUpdate(req.params.id, newTask)
+
+    res.json({status: 'Task updated', content: { oldTask, newTask }})
 })
 
 module.exports = router
