@@ -32,6 +32,28 @@ function App() {
     .catch(err => console.log(err))
   }
 
+  function deleteTask(id) {
+    console.log(`Deleting ${id}`)
+
+    if(!confirm('¿Estás seguro de querer eliminarlo?')) return
+
+    fetch(`/api/tasks/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+
+      alert('Task deleted D:')
+    })
+
+    fetchTasks()
+  }
+
   function fetchTasks() {
     fetch('/api/tasks')
     .then(res => res.json())
@@ -92,6 +114,11 @@ function App() {
 
                   <td>
                     {task.description}
+                  </td>
+
+                  <td>
+                    <button>Edit</button>
+                    <button onClick={() => deleteTask(task._id)}>Delete</button>
                   </td>
                 </tr>
               )
