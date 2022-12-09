@@ -1,7 +1,7 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 
 function App() {
-  const [task, setTask] = useState({ title: "", description: "" })
+  const [task, setTask] = useState({ title: "", description: "", tasks: [] })
 
   function handleChange(event) {
     setTask({
@@ -23,12 +23,28 @@ function App() {
     .then(data => {
       console.log(data)
       console.log(task)
-      
+
       alert('Task added :D')
       setTask({ title: '', description: '' })
     })
     .catch(err => console.log(err))
   }
+
+  function fetchTasks() {
+    fetch('/api/tasks')
+    .then(res => res.json())
+    .then(
+      data => {
+        console.log(data)
+        setTask({ tasks: data })
+        console.log(task.tasks)
+      }
+    )
+  }
+
+  useEffect(() => {
+    fetchTasks()
+  }, [])
 
   return (
     <div className="App">
