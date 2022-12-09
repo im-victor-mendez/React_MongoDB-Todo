@@ -1,10 +1,6 @@
-const { render } = require("react-dom")
+import React from "react";
+import { render } from "react-dom";
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  )
-}
+import App from "./App";
 
 render(<App />, document.getElementById('root'))
