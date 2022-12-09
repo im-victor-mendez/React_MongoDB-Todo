@@ -25,7 +25,9 @@ function App() {
       console.log(task)
 
       alert('Task added :D')
-      setTask({ title: '', description: '' })
+      setTask({ ...task, title: '', description: '' })
+      
+      fetchTasks()
     })
     .catch(err => console.log(err))
   }
@@ -70,6 +72,32 @@ function App() {
 
           <button type="submit">Agregar</button>
         </form>
+      </section>
+
+      <section>
+        <table>
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              task.tasks.map(
+                task => <tr key={task._id}>
+                  <td>
+                    {task.title}
+                  </td>
+
+                  <td>
+                    {task.description}
+                  </td>
+                </tr>
+              )
+            }
+          </tbody>
+        </table>
       </section>
     </div>
   )
