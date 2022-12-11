@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 function App() {
-  const [task, setTask] = useState({ title: "", description: "", tasks: [] })
+  const [task, setTask] = useState({ _id: "", title: "", description: "", tasks: [] })
 
   function handleChange(event) {
     setTask({
@@ -11,25 +11,56 @@ function App() {
   }
 
   function addTask() {
-    fetch('/api/tasks', {
-      method: 'POST',
-      body: JSON.stringify(task),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(res => res.json())
+    if(task._id) {
+      /* Edit task */
+      fetch(`/api/tasks/${task._id}`, {
+        method: 'PUT',
+        body: JSON.stringify(task),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+
+        alert('Task edited :D')
+        setTask({ ...task, _id: '', title: '', description: '' })
+        
+        fetchTasks()
+      })
+    } else {
+      fetch('/api/tasks', {
+        method: 'POST',
+        body: JSON.stringify(task),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        console.log(task)
+  
+        alert('Task added :D')
+        setTask({ ...task, title: '', description: '' })
+        
+        fetchTasks()
+      })
+      .catch(err => console.log(err))
+    }
+  }
+
+  function editTask(id) {
+    fetch(`/api/tasks/${id}`)
+    .then(res =>res.json())
     .then(data => {
       console.log(data)
-      console.log(task)
 
-      alert('Task added :D')
-      setTask({ ...task, title: '', description: '' })
-      
-      fetchTasks()
+      setTask({ ...task, _id: data._id, title: data.title, description: data.description })
     })
-    .catch(err => console.log(err))
   }
 
   function deleteTask(id) {
@@ -92,7 +123,7 @@ function App() {
             <textarea name="description" onChange={handleChange} value={task.description}></textarea>
           </label>
 
-          <button type="submit">Agregar</button>
+          <button type="submit">{!task._id ? "Agregar" : "Actualizar"}</button>
         </form>
       </section>
 
@@ -117,7 +148,7 @@ function App() {
                   </td>
 
                   <td>
-                    <button>Edit</button>
+                    <button onClick={() => editTask(task._id)}>Edit</button>
                     <button onClick={() => deleteTask(task._id)}>Delete</button>
                   </td>
                 </tr>
